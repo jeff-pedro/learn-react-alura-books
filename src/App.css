@@ -4,6 +4,7 @@
     background-image: linear-gradient(90deg, #002F52 35%, #326589);
 }
 
-.App-header {
-    background-color: #fff;
+li {
+    list-style: none;
 }
+
