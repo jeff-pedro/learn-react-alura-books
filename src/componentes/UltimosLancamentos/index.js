@@ -12,9 +12,9 @@ const Titulo = styled.h2`
     width: 100%;
     padding: 30px 0;
     background-color: #FFF;
-    color: #EB9B00;
-    font-size: 36px;
-    text-align: center;
+    color: ${props => props.cor || "#000"};
+    font-size: ${props => props.tamanhoFonte || "18px"};
+    text-align: ${props => props.alinhamento || "center"};
     margin: 0;
 `
 
@@ -29,7 +29,10 @@ const NovosLivrosContainer = styled.div`
 function UltimosLancamentos() {
     return (
         <UltimosLancamentosContainer>
-            <Titulo>ÚLTIMOS LANÇAMENTOS</Titulo>
+            <Titulo 
+                cor="#EB9B00" 
+                tamanhoFonte="36px" 
+            >ÚLTIMOS LANÇAMENTOS</Titulo>
             <NovosLivrosContainer>
                 { livros.map(livro => (
                     <img src={livro.src} alt="um livro"/>
