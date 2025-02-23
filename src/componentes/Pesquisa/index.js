@@ -51,11 +51,15 @@ function Pesquisa() {
     const [livros, setLivros] = useState([]);
     
     useEffect(() => {
-        const livrosDaAPI = getLivros();
+        fetch();
+    }, []);
+    
+    async function fetch() {
+        const livrosDaAPI = await getLivros();
         console.log(livrosDaAPI);
         
         setLivros(livrosDaAPI)
-    }, []);
+    }
 
     return (
         <PesquisaContainer>
