@@ -17,7 +17,7 @@ const Opcao = styled.li`
   min-width: 120px;
 `
 
-const textoOpcoes = ["CATEGORIAS", "ESTANTE", "FAVORITOS"];
+const textoOpcoes = ["CATEGORIAS", "FAVORITOS", "ESTANTE"];
 
 function OpcoesHeader() {
     return (
