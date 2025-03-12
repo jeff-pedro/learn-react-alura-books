@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { getFavoritos } from "../servicos/favoritos";
+import { deleteFavorito, getFavoritos } from "../servicos/favoritos";
 
 const AppContainer = styled.div`
   width: 100vw;
@@ -16,7 +16,6 @@ const ResultadoContainer = styled.div`
 
 const Resultado = styled.div`
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     margin: 20px 0;
@@ -24,11 +23,11 @@ const Resultado = styled.div`
     text-align: center;
     padding: 0 100px;
     p {
-        width: 100%;
+        width: 200px;
         color: #FFF;
     }
     img {
-        width: 200px;
+        width: 100px;
     }
     &:hover {
         border: 1px solid white;
@@ -46,27 +45,30 @@ const Titulo = styled.h2`
 function Favoritos() {
     const [favoritos, setFavoritos] = useState([]);
 
+    useEffect(() => {
+        fetchFavoritos();
+    }, [favoritos])
+
     async function fetchFavoritos() {
         const favoritosDaAPI = await getFavoritos();
-        console.log(favoritosDaAPI);
-        
         setFavoritos(favoritosDaAPI);
     }
 
-    useEffect(() => {
-        fetchFavoritos();
-    }, [])
-    
-    console.log(favoritos);
+    async function deletarFavorito(id) {
+        await deleteFavorito(id);
+        await fetchFavoritos();
+        alert(`Livro com id:${id} removido!`);
+    }
+
     return (
         <AppContainer>
             <div>
                 <Titulo>Aqui estão seus livros favoritos:</Titulo>
                 <ResultadoContainer>
                     {favoritos.length !== 0 ? favoritos.map(favorito => (
-                        <Resultado>
-                            <p>{favorito.nome}</p>
+                        <Resultado onClick={() => deletarFavorito(favorito.id)}>
                             <img src={favorito.src} alt="um livro"/>
+                            <p>{favorito.nome}</p>
                         </Resultado>
                         )) : null
                     }
